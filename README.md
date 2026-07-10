@@ -8,7 +8,7 @@ This project automates the deployment of a secure AWS infrastructure using Terra
 
 The deployment demonstrates Infrastructure as Code (IaC) principles by automatically provisioning networking, security groups, routing, firewall interfaces, Elastic IPs, and compute resources.
 
-Features
+# Features
 Automated AWS Infrastructure Deployment
 Palo Alto VM-Series NGFW
 Windows Server 2022 Instance
@@ -19,7 +19,8 @@ Elastic IP Assignment
 Custom Route Tables
 Modular Terraform Code
 Production-Ready Project Structure
-Architecture
+
+# Architecture
                 Internet
                     |
           +-------------------+
