@@ -1,47 +1,56 @@
 # Terraform-aws-paloalto-lab
 Palo Alto Networks AWS Terraform Lab is an automated hands-on environment designed to test, validate, and deploy Palo Alto VM-Series Virtual Firewalls or Cloud Next-Generation Firewalls (NGFW) inside Amazon Web Services (AWS) using Infrastructure as Code (IaC)
 
-AWS Palo Alto VM-Series Firewall & Windows Server Deployment using Terraform
-Project Overview
+# AWS Palo Alto VM-Series Firewall & Windows Server Deployment using Terraform
 
-This project automates the deployment of a secure AWS infrastructure using Terraform, including a Palo Alto VM-Series Next-Generation Firewall and a Windows Server 2022 EC2 instance.
+## 📖 Overview
 
-The deployment demonstrates Infrastructure as Code (IaC) principles by automatically provisioning networking, security groups, routing, firewall interfaces, Elastic IPs, and compute resources.
+This project demonstrates how to deploy a **Palo Alto VM-Series Next-Generation Firewall** and a **Windows Server 2022 EC2 instance** in **Amazon Web Services (AWS)** using **Terraform**.
 
-# Features
-Automated AWS Infrastructure Deployment
-Palo Alto VM-Series NGFW
-Windows Server 2022 Instance
-Infrastructure as Code (Terraform)
-Multi-NIC Firewall Deployment
-Secure Management Access
-Elastic IP Assignment
-Custom Route Tables
-Modular Terraform Code
-Production-Ready Project Structure
+The infrastructure is deployed using Infrastructure as Code (IaC) best practices, creating networking, routing, security groups, Elastic IPs, firewall interfaces, and compute resources automatically.
 
-#Architecture
-                Internet
-                    |
-          +-------------------+
-          | Internet Gateway  |
-          +-------------------+
-                    |
-        --------------------------
-        |                        |
- Management Subnet         Untrust Subnet
-     (eth0)                   (eth1)
-        |                        |
-        +------ Palo Alto -------+
-                 Firewall
-                   |
-              Trust Interface
-                   |
-             Trust Subnet
-                   |
-         Windows Server 2022
-        
-# Project Structure
+---
+
+## 🚀 Features
+
+- Deploy Palo Alto VM-Series NGFW on AWS
+- Deploy Windows Server 2022 EC2 Instance
+- Infrastructure as Code (Terraform)
+- Multi-NIC Firewall Deployment
+- VPC with Management, Untrust, and Trust Networks
+- Elastic IP Assignment
+- Security Groups
+- Route Tables
+- Modular Terraform Configuration
+- Production-Ready Project Structure
+
+---
+
+# 🏗 Architecture
+
+```
+                    Internet
+                        │
+                Internet Gateway
+                        │
+        ┌───────────────┴───────────────┐
+        │                               │
+ Management Subnet               Untrust Subnet
+     (eth0)                         (eth1)
+        │                               │
+        └──────── Palo Alto Firewall ───┘
+                    Trust (eth2)
+                        │
+                  Trust Subnet
+                        │
+              Windows Server 2022
+```
+
+---
+
+# 📁 Project Structure
+
+```
 terraform-paloalto-aws/
 │
 ├── provider.tf
@@ -55,171 +64,365 @@ terraform-paloalto-aws/
 ├── windows.tf
 ├── outputs.tf
 ├── versions.tf
-└── README.md
-# Components
-# Networking
-Custom VPC
-Internet Gateway
-Three Subnets
-  Management
-  Untrust
-  Trust
-Route Tables
-Network Interfaces
+├── README.md
+└── .gitignore
+```
 
-# Palo Alto Firewall
-Management Interface
-Untrust Interface
-Trust Interface
-Elastic IP for Management
-Elastic IP for Untrust
-SSH Access
-HTTPS Management
-Bootstrap Ready
+---
 
-# Windows Server
-Windows Server 2022
-Private Deployment
-RDP through Firewall
-User Data Configuration
-Internal Communication
-Security
+# ⚙ Components
 
-Management Interface
+## Networking
 
-Protocol	Port	Purpose
-HTTPS	443	Firewall Management
-SSH	22	CLI Management
+- Custom VPC
+- Internet Gateway
+- Management Subnet
+- Untrust Subnet
+- Trust Subnet
+- Route Tables
+- Network Interfaces
 
-Trust Network
+---
 
-Internal Communication
-Windows Server Access
-Firewall Protected
+## Palo Alto Firewall
 
-Untrust Network
+- VM-Series Next-Generation Firewall
+- Management Interface
+- Untrust Interface
+- Trust Interface
+- Elastic IP for Management
+- Elastic IP for Untrust
+- HTTPS Management Access
+- SSH Access
+- Bootstrap Ready
 
-Internet Connectivity
-Public Services
-NAT Configuration
-Deployment Workflow
+---
+
+## Windows Server
+
+- Windows Server 2022
+- Private EC2 Instance
+- RDP Access
+- User Data Configuration
+- Internal Network Connectivity
+
+---
+
+# 🔒 Security
+
+### Management Interface
+
+| Protocol | Port | Purpose |
+|----------|------|----------|
+| HTTPS | 443 | Firewall Management |
+| SSH | 22 | CLI Management |
+
+---
+
+### Trust Network
+
+- Internal Communication
+- Windows Server Access
+- Protected by Palo Alto Firewall
+
+---
+
+### Untrust Network
+
+- Internet Access
+- Public Connectivity
+- NAT Configuration
+
+---
+
+# 🔄 Deployment Workflow
+
+```
 Terraform
 
-↓
-
-Create VPC
-
-↓
-
-Create Subnets
-
-↓
-
-Deploy Security Groups
-
-↓
-
-Deploy Network Interfaces
-
-↓
-
-Deploy Palo Alto Firewall
-
-↓
-
-Assign Elastic IPs
-
-↓
-
-Deploy Windows Server
-
-↓
-
-Configure Routing
-
-↓
-
-Output Management IP
-Prerequisites
-AWS Account
-Terraform 1.5+
-AWS CLI Configured
-EC2 Key Pair
-Palo Alto VM-Series AMI
-Visual Studio Code (Optional)
-Deployment
-
-Initialize Terraform
+    │
 
 terraform init
 
-Validate
-
-terraform validate
-
-Plan
+    │
 
 terraform plan
 
-Deploy
+    │
 
 terraform apply
 
+    │
+
+Create VPC
+
+    │
+
+Create Subnets
+
+    │
+
+Deploy Security Groups
+
+    │
+
+Deploy Network Interfaces
+
+    │
+
+Deploy Palo Alto Firewall
+
+    │
+
+Assign Elastic IPs
+
+    │
+
+Deploy Windows Server
+
+    │
+
+Configure Route Tables
+
+    │
+
+Terraform Outputs
+```
+
+---
+
+# ✅ Prerequisites
+
+- AWS Account
+- Terraform v1.5 or later
+- AWS CLI Configured
+- EC2 Key Pair
+- Palo Alto VM-Series AMI
+- Visual Studio Code (Recommended)
+
+---
+
+# 📥 Deployment
+
+## Clone Repository
+
+```bash
+git clone https://github.com/<your-github-username>/terraform-paloalto-aws.git
+
+cd terraform-paloalto-aws
+```
+
+---
+
+## Configure Variables
+
+Rename:
+
+```
+terraform.tfvars.example
+```
+
+to
+
+```
+terraform.tfvars
+```
+
+Update the following values:
+
+- AWS Region
+- AWS Access Key
+- AWS Secret Key
+- EC2 Key Pair
+- Palo Alto AMI ID
+- Your Public IP
+
+---
+
+## Initialize Terraform
+
+```bash
+terraform init
+```
+
+---
+
+## Validate Configuration
+
+```bash
+terraform validate
+```
+
+---
+
+## Preview Deployment
+
+```bash
+terraform plan
+```
+
+---
+
+## Deploy Infrastructure
+
+```bash
+terraform apply
+```
+
+Type:
+
+```
+yes
+```
+
+when prompted.
+
+---
+
+# 📤 Terraform Outputs
+
+After deployment Terraform displays:
+
+- Firewall Management Public IP
+- Firewall Untrust Public IP
+- Windows Server Private IP
+
+Example:
+
+```
+management_public_ip = xx.xx.xx.xx
+
+untrust_public_ip = xx.xx.xx.xx
+
+windows_private_ip = 10.3.2.10
+```
+
+---
+
+# 🌐 Access
+
+## Firewall GUI
+
+```
+https://<management_public_ip>
+```
+
+---
+
+## Firewall SSH
+
+```bash
+ssh admin@<management_public_ip>
+```
+
+---
+
+## Windows RDP
+
+Use:
+
+- Firewall Untrust Public IP
+- Administrator
+- Retrieved Windows Password
+
+---
+
+# 🛠 Useful Terraform Commands
+
+Initialize
+
+```bash
+terraform init
+```
+
+Validate
+
+```bash
+terraform validate
+```
+
+Plan
+
+```bash
+terraform plan
+```
+
+Apply
+
+```bash
+terraform apply
+```
+
 Destroy
 
+```bash
 terraform destroy
-Outputs
+```
 
-Terraform displays:
+---
 
-Firewall Management Public IP
-Firewall Untrust Public IP
-Windows Private IP
-Skills Demonstrated
-Terraform
-AWS EC2
-AWS VPC
-AWS Route Tables
-AWS Security Groups
-Elastic IP
-Palo Alto VM-Series
-Infrastructure as Code
-Network Security
-Cloud Networking
-Future Enhancements
-Panorama Integration
-GlobalProtect VPN
-AWS Transit Gateway
-Auto Scaling
-High Availability Firewall
-Bootstrap Automation
-CloudWatch Monitoring
-IAM Role-Based Access
-GitHub Actions CI/CD
-Terraform Modules
-Remote Terraform State (S3 + DynamoDB)
-Technologies Used
-Terraform
-AWS
-Palo Alto VM-Series
-Windows Server 2022
-Visual Studio Code
-Git
-GitHub
-Author
+# 📚 Skills Demonstrated
 
+- Terraform
+- Infrastructure as Code (IaC)
+- AWS EC2
+- AWS VPC
+- AWS Networking
+- AWS Route Tables
+- AWS Security Groups
+- Elastic IP
+- Palo Alto VM-Series
+- Cloud Security
+- Network Security
+- Infrastructure Automation
 
-To make this repository clearly your own, I also recommend:
-Rename files (provider.tf instead of awsprovider.tf, network.tf instead of aws-networking.tf).
-Add an architecture diagram (draw.io or Visio).
-Include screenshots of the deployed AWS resources and Palo Alto GUI.
-Add a LICENSE file and a .gitignore.
-Add sample Terraform outputs and a troubleshooting section.
-Use your own comments and formatting in the Terraform files rather than copying another repository verbatim.
+---
 
-These changes help demonstrate your own implementation and presentation of the project rather than simply mirroring an existing repository.
+# 🚀 Future Enhancements
 
+- Panorama Integration
+- GlobalProtect VPN
+- AWS Transit Gateway
+- High Availability (HA)
+- Auto Scaling
+- Bootstrap Automation
+- GitHub Actions CI/CD
+- Remote Terraform State (S3 + DynamoDB)
+- CloudWatch Monitoring
+- IAM Roles
 
-Sadam Uysen
-Senior Cyber Security Specialist
-Cloud | AWS | Azure | Palo Alto | Prisma Cloud | Terraform | Network Security | DevSecOps
+---
+
+# 🧰 Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| Terraform | Infrastructure as Code |
+| AWS | Cloud Platform |
+| Palo Alto VM-Series | Next-Generation Firewall |
+| Windows Server 2022 | Compute Instance |
+| Git | Version Control |
+| GitHub | Repository Hosting |
+| VS Code | Development Environment |
+
+---
+
+# 📄 License
+
+This project is intended for learning, testing, and demonstration purposes.
+
+Please ensure you have a valid **Palo Alto VM-Series license** before using the firewall in a production environment.
+
+---
+
+# 👤 Author
+
+## Sadam Uysen
+
+**Senior Cyber Security Specialist**
+
+**AWS • Azure • Palo Alto • Prisma Cloud • Terraform • Network Security • Cloud Security • DevSecOps**
+
+---
+
+⭐ If you found this project useful, consider giving it a **Star** on GitHub.
