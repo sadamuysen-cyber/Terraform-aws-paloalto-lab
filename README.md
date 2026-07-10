@@ -20,7 +20,7 @@ Custom Route Tables
 Modular Terraform Code
 Production-Ready Project Structure
 
-# Architecture
+#Architecture
                 Internet
                     |
           +-------------------+
@@ -40,7 +40,8 @@ Production-Ready Project Structure
              Trust Subnet
                    |
          Windows Server 2022
-Project Structure
+        
+# Project Structure
 terraform-paloalto-aws/
 │
 ├── provider.tf
@@ -55,17 +56,18 @@ terraform-paloalto-aws/
 ├── outputs.tf
 ├── versions.tf
 └── README.md
-Components
-Networking
+# Components
+# Networking
 Custom VPC
 Internet Gateway
 Three Subnets
-Management
-Untrust
-Trust
+  Management
+  Untrust
+  Trust
 Route Tables
 Network Interfaces
-Palo Alto Firewall
+
+# Palo Alto Firewall
 Management Interface
 Untrust Interface
 Trust Interface
@@ -74,7 +76,8 @@ Elastic IP for Untrust
 SSH Access
 HTTPS Management
 Bootstrap Ready
-Windows Server
+
+# Windows Server
 Windows Server 2022
 Private Deployment
 RDP through Firewall
